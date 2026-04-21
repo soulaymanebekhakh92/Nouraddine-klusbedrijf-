@@ -1,0 +1,44 @@
+"91542"}
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <title>Nouraddine Klusbedrijf</title>
+  <style>
+    body {font-family: Arial; margin:0; background:#f5f5f5;}
+    header {background:#111; color:#fff; padding:20px; text-align:center;}
+    section {padding:20px;}
+    .services {display:flex; flex-wrap:wrap; gap:10px;}
+    .card {background:#fff; padding:15px; border-radius:10px; flex:1;}
+    footer {background:#111; color:#fff; text-align:center; padding:10px;}
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>Nouraddine Klusbedrijf</h1>
+  <p>Tegelwerk • Stucwerk • Sanitair • Keuken</p>
+</header>
+
+<section>
+  <h2>Onze Diensten</h2>
+  <div class="services">
+    <div class="card">Badkamer renovatie</div>
+    <div class="card">Keuken installatie</div>
+    <div class="card">Tegelwerk</div>
+    <div class="card">Stucwerk</div>
+    <div class="card">Sanitair</div>
+  </div>
+</section>
+
+<section>
+  <h2>Contact</h2>
+  <p>Neem contact met ons op voor een offerte.</p>
+</section>
+
+<footer>
+  <p>© 2026 Nouraddine Klusbedrijf</p>
+</footer>
+
+</body>
