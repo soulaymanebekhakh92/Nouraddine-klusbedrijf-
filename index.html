@@ -1,255 +1,277 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="nl" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Elite Craftsmanship | Tiling, Painting & Gypsum</title>
-    <!-- Tailwind CSS for modern layout -->
+    <title>VAKMAN.PRO | Tegel, Stucwerk & Renovatie</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Font Awesome for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-        body { font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
-        h1, h2, h3 { font-family: 'Playfair Display', serif; }
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap');
         
-        .gold-gradient {
-            background: linear-gradient(135deg, #d4af37 0%, #f9f295 50%, #b8860b 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
         }
+
+        .service-card { transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+        .service-card:hover { transform: translateY(-8px); }
+
+        .portfolio-item { position: relative; overflow: hidden; border-radius: 1rem; }
+        .portfolio-overlay {
+            background: linear-gradient(to top, rgba(15, 23, 42, 0.9), transparent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .portfolio-item:hover .portfolio-overlay { opacity: 1; }
         
-        .bg-navy { background-color: #001f3f; }
-        .border-gold { border-color: #d4af37; }
-        .btn-gold { background: #d4af37; color: #001f3f; transition: all 0.3s ease; }
-        .btn-gold:hover { background: #b8860b; color: white; transform: translateY(-2px); }
+        .filter-btn.active {
+            background-color: #2563eb;
+            color: white;
+            border-color: #2563eb;
+        }
 
-        .service-card:hover img { transform: scale(1.1); }
-        .service-card img { transition: transform 0.5s ease; }
-
-        .gallery-item:hover .overlay { opacity: 1; }
-        .overlay { background: rgba(0, 31, 63, 0.8); opacity: 0; transition: opacity 0.3s ease; }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
     </style>
 </head>
-<body class="bg-slate-50">
+<body class="bg-slate-50 text-slate-900">
 
-    <!-- Navigation -->
-    <nav class="fixed w-full z-50 bg-navy/95 text-white py-4 px-6 md:px-12 flex justify-between items-center border-b border-white/10">
-        <div class="text-xl font-bold tracking-widest uppercase">
-            ELITE<span class="text-yellow-500">HOMES</span>
+    <nav class="fixed top-0 w-full z-50 glass-nav border-b border-slate-200/50">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <a href="#" class="text-2xl font-extrabold tracking-tighter text-blue-600">VAKMAN<span class="text-slate-900">.PRO</span></a>
+            
+            <div class="hidden md:flex items-center space-x-10 font-semibold text-sm uppercase tracking-wider">
+                <a href="#services" class="hover:text-blue-600 transition">Diensten</a>
+                <a href="#portfolio" class="hover:text-blue-600 transition">Portfolio</a>
+                <a href="#comments" class="hover:text-blue-600 transition">Reviews</a>
+                <a href="#contact" class="bg-slate-900 text-white px-6 py-3 rounded-full hover:bg-blue-600 transition shadow-lg shadow-blue-900/10">Offerte Aanvragen</a>
+            </div>
+
+            <button class="md:hidden text-2xl" onclick="toggleMenu()"><i class="fas fa-bars"></i></button>
         </div>
-        <div class="hidden md:flex space-x-8 text-sm uppercase tracking-wider font-semibold">
-            <a href="#home" class="hover:text-yellow-500 transition">Home</a>
-            <a href="#services" class="hover:text-yellow-500 transition">Services</a>
-            <a href="#work" class="hover:text-yellow-500 transition">Our Work</a>
-            <a href="#contact" class="hover:text-yellow-500 transition">Contact</a>
+        
+        <div id="mobileMenu" class="hidden md:hidden bg-white border-b border-slate-200 px-6 py-6 space-y-4">
+            <a href="#services" class="block font-bold" onclick="toggleMenu()">Diensten</a>
+            <a href="#portfolio" class="block font-bold" onclick="toggleMenu()">Portfolio</a>
+            <a href="#contact" class="block font-bold" onclick="toggleMenu()">Contact</a>
         </div>
-        <a href="https://wa.me/YOUR_NUMBER" class="bg-green-600 hover:bg-green-700 px-4 py-2 rounded-full text-xs font-bold flex items-center">
-            <i class="fab fa-whatsapp mr-2"></i> CHAT NOW
-        </a>
     </nav>
 
-    <!-- Hero Section -->
-    <section id="home" class="relative h-screen flex items-center justify-center text-center overflow-hidden">
-        <div class="absolute inset-0">
-            <img src="https://images.unsplash.com/photo-1513694203232-719a280e022f?q=80&w=2069&auto=format&fit=crop" class="w-full h-full object-cover" alt="Luxury interior">
-            <div class="absolute inset-0 bg-navy/60"></div>
-        </div>
-        <div class="relative z-10 px-4">
-            <h1 class="text-5xl md:text-7xl text-white mb-6">Expert Finish for <br><span class="gold-gradient">Elite Interiors</span></h1>
-            <p class="text-white/80 text-lg md:text-xl max-w-2xl mx-auto mb-8 font-light">
-                Professional Zellige, Painting, Gypsum, and Kitchen installations across Morocco. Quality you can see, durability you can trust.
+    <header class="pt-40 pb-24 px-6">
+        <div class="max-w-5xl mx-auto text-center">
+            <span class="inline-block px-4 py-1.5 mb-6 text-xs font-bold tracking-widest text-blue-600 uppercase bg-blue-50 rounded-full">Meester in Renovatie</span>
+            <h1 class="text-5xl md:text-7xl font-extrabold mb-8 tracking-tight leading-[1.1]">
+                Vakmanschap tot in de <span class="text-blue-600 italic">kleinste details.</span>
+            </h1>
+            <p class="text-lg md:text-xl text-slate-500 max-w-2xl mx-auto leading-relaxed mb-10">
+                Van luxe badkamerrenovaties tot strak stucwerk. Wij combineren jarenlange ervaring met een moderne afwerking.
             </p>
-            <div class="flex flex-col md:flex-row justify-center gap-4">
-                <a href="#work" class="btn-gold px-10 py-4 rounded font-bold uppercase tracking-widest">View Gallery</a>
-                <a href="#services" class="border border-white text-white hover:bg-white hover:text-navy px-10 py-4 rounded font-bold uppercase tracking-widest transition">Our Services</a>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="#portfolio" class="bg-blue-600 text-white px-8 py-4 rounded-2xl font-bold hover:bg-blue-700 transition-all shadow-xl shadow-blue-600/20 text-center">Bekijk Projecten</a>
+                <a href="#contact" class="bg-white border border-slate-200 px-8 py-4 rounded-2xl font-bold hover:bg-slate-50 transition-all text-center">Neem Contact Op</a>
+            </div>
+        </div>
+    </header>
+
+    <section id="services" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-4">
+                <div class="max-w-xl">
+                    <h2 class="text-3xl md:text-4xl font-extrabold mb-4">Onze Expertise</h2>
+                    <p class="text-slate-500">Wij bieden een totaaloplossing voor uw woning. Geen gedoe met verschillende aannemers, maar één aanspreekpunt.</p>
+                </div>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="service-card group bg-slate-50 p-10 rounded-3xl border border-slate-100 hover:bg-white hover:border-blue-100">
+                    <div class="w-14 h-14 bg-blue-600 text-white rounded-2xl flex items-center justify-center mb-8 shadow-lg shadow-blue-600/30">
+                        <i class="fas fa-layer-group text-xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">Tegelzetter</h3>
+                    <p class="text-slate-600 leading-relaxed">Grootformaat tegels, visgraatmotieven of klassiek natuursteen. Perfect recht, elke keer weer.</p>
+                </div>
+
+                <div class="service-card group bg-slate-50 p-10 rounded-3xl border border-slate-100 hover:bg-white hover:border-blue-100">
+                    <div class="w-14 h-14 bg-emerald-500 text-white rounded-2xl flex items-center justify-center mb-8 shadow-lg shadow-emerald-500/30">
+                        <i class="fas fa-sink text-xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">Badkamers</h3>
+                    <p class="text-slate-600 leading-relaxed">Complete renovatie inclusief leidingwerk, sanitair installatie en waterdichte afwerking.</p>
+                </div>
+
+                <div class="service-card group bg-slate-50 p-10 rounded-3xl border border-slate-100 hover:bg-white hover:border-blue-100">
+                    <div class="w-14 h-14 bg-orange-500 text-white rounded-2xl flex items-center justify-center mb-8 shadow-lg shadow-orange-500/30">
+                        <i class="fas fa-brush text-xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">Stucwerk</h3>
+                    <p class="text-slate-600 leading-relaxed">Sausklaar stucwerk of decoratieve betonlook (Cire). Voor wanden die gezien mogen worden.</p>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Services Section -->
-    <section id="services" class="py-24 px-6 md:px-12 bg-white">
+    <section id="portfolio" class="py-24 px-6">
         <div class="max-w-7xl mx-auto">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl text-navy mb-4">Our Premium Services</h2>
-                <div class="w-24 h-1 bg-yellow-600 mx-auto"></div>
+            <div class="flex flex-col md:flex-row justify-between items-center mb-12 gap-8">
+                <h2 class="text-3xl font-extrabold">Recent Werk</h2>
+                <div class="flex flex-wrap justify-center gap-2 bg-white p-1.5 rounded-2xl border border-slate-200">
+                    <button onclick="filterWorks('all')" class="filter-btn active px-6 py-2.5 rounded-xl text-sm font-bold transition-all" data-filter="all">Alles</button>
+                    <button onclick="filterWorks('tegel')" class="filter-btn px-6 py-2.5 rounded-xl text-sm font-bold transition-all" data-filter="tegel">Tegelwerk</button>
+                    <button onclick="filterWorks('sanitair')" class="filter-btn px-6 py-2.5 rounded-xl text-sm font-bold transition-all" data-filter="sanitair">Badkamers</button>
+                </div>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <!-- Tiling -->
-                <div class="service-card group overflow-hidden rounded-lg shadow-lg bg-slate-50 border border-slate-200">
-                    <div class="h-48 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1618220179428-22790b461013?auto=format&fit=crop&w=600" class="w-full h-full object-cover" alt="Tiling">
-                    </div>
-                    <div class="p-6 text-center">
-                        <i class="fas fa-th-large text-3xl text-yellow-600 mb-4"></i>
-                        <h3 class="text-xl font-bold mb-2">Zellige & Tiling</h3>
-                        <p class="text-slate-600 text-sm">Authentic Moroccan Zellige and modern ceramic tiles with laser-level precision.</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="gallery">
+                <div class="portfolio-item tegel group cursor-pointer">
+                    <img src="https://images.unsplash.com/photo-1502005229762-cf1b2da7c5d6?q=80&w=800" class="w-full aspect-[4/5] object-cover transition duration-700 group-hover:scale-110" alt="Luxe Tegelwerk">
+                    <div class="portfolio-overlay absolute inset-0 flex flex-col justify-end p-8 text-white">
+                        <span class="text-xs font-bold uppercase tracking-widest text-blue-400 mb-2">Tegelwerk</span>
+                        <h4 class="text-xl font-bold">Marmer-look Woonkamer</h4>
                     </div>
                 </div>
-
-                <!-- Painting -->
-                <div class="service-card group overflow-hidden rounded-lg shadow-lg bg-slate-50 border border-slate-200">
-                    <div class="h-48 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1589939705384-5185137a7f0f?auto=format&fit=crop&w=600" class="w-full h-full object-cover" alt="Painting">
-                    </div>
-                    <div class="p-6 text-center">
-                        <i class="fas fa-paint-roller text-3xl text-yellow-600 mb-4"></i>
-                        <h3 class="text-xl font-bold mb-2">Artistic Painting</h3>
-                        <p class="text-slate-600 text-sm">Professional interior and exterior painting including decorative textures and luxury finishes.</p>
+                <div class="portfolio-item sanitair group cursor-pointer">
+                    <img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?q=80&w=800" class="w-full aspect-[4/5] object-cover transition duration-700 group-hover:scale-110" alt="Badkamer">
+                    <div class="portfolio-overlay absolute inset-0 flex flex-col justify-end p-8 text-white">
+                        <span class="text-xs font-bold uppercase tracking-widest text-blue-400 mb-2">Badkamer</span>
+                        <h4 class="text-xl font-bold">Moderne Inloopdouche</h4>
                     </div>
                 </div>
-
-                <!-- Gypsum -->
-                <div class="service-card group overflow-hidden rounded-lg shadow-lg bg-slate-50 border border-slate-200">
-                    <div class="h-48 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1505691938895-1758d7eaa511?auto=format&fit=crop&w=600" class="w-full h-full object-cover" alt="Gypsum">
-                    </div>
-                    <div class="p-6 text-center">
-                        <i class="fas fa-layer-group text-3xl text-yellow-600 mb-4"></i>
-                        <h3 class="text-xl font-bold mb-2">Gypsum & Decor</h3>
-                        <p class="text-slate-600 text-sm">Intricate ceiling designs, false ceilings, and wall decorations for modern and traditional homes.</p>
-                    </div>
-                </div>
-
-                <!-- Kitchen -->
-                <div class="service-card group overflow-hidden rounded-lg shadow-lg bg-slate-50 border border-slate-200">
-                    <div class="h-48 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1556911223-e250e3362145?auto=format&fit=crop&w=600" class="w-full h-full object-cover" alt="Kitchen">
-                    </div>
-                    <div class="p-6 text-center">
-                        <i class="fas fa-kitchen-set text-3xl text-yellow-600 mb-4"></i>
-                        <h3 class="text-xl font-bold mb-2">Kitchen Fitting</h3>
-                        <p class="text-slate-600 text-sm">Bespoke kitchen installations including cabinets, counters, and electrical maintenance.</p>
+                <div class="portfolio-item tegel group cursor-pointer">
+                    <img src="https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?q=80&w=800" class="w-full aspect-[4/5] object-cover transition duration-700 group-hover:scale-110" alt="Keuken">
+                    <div class="portfolio-overlay absolute inset-0 flex flex-col justify-end p-8 text-white">
+                        <span class="text-xs font-bold uppercase tracking-widest text-blue-400 mb-2">Stucwerk</span>
+                        <h4 class="text-xl font-bold">Beton Cire Wand</h4>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Work Gallery -->
-    <section id="work" class="py-24 bg-navy text-white px-6">
-        <div class="max-w-7xl mx-auto text-center">
-            <h2 class="text-4xl mb-12">Our Masterpieces</h2>
-            <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
-                <div class="relative gallery-item h-64 rounded-lg overflow-hidden cursor-pointer">
-                    <img src="https://images.unsplash.com/photo-1574362848149-11496d93a7c7?auto=format&fit=crop&w=600" class="w-full h-full object-cover" alt="Work 1">
-                    <div class="overlay absolute inset-0 flex items-center justify-center">
-                        <p class="font-bold border-b border-yellow-500">Zellige Detail</p>
-                    </div>
-                </div>
-                <div class="relative gallery-item h-64 rounded-lg overflow-hidden cursor-pointer">
-                    <img src="https://images.unsplash.com/photo-1604014237800-1c9102c219da?auto=format&fit=crop&w=600" class="w-full h-full object-cover" alt="Work 2">
-                    <div class="overlay absolute inset-0 flex items-center justify-center">
-                        <p class="font-bold border-b border-yellow-500">Luxury Living Room</p>
-                    </div>
-                </div>
-                <div class="relative gallery-item h-64 rounded-lg overflow-hidden cursor-pointer">
-                    <img src="https://images.unsplash.com/photo-1502005229762-cf1b2da7c5d6?auto=format&fit=crop&w=600" class="w-full h-full object-cover" alt="Work 3">
-                    <div class="overlay absolute inset-0 flex items-center justify-center">
-                        <p class="font-bold border-b border-yellow-500">Modern Ceiling</p>
-                    </div>
-                </div>
-                <div class="relative gallery-item h-64 rounded-lg overflow-hidden cursor-pointer">
-                    <img src="https://images.unsplash.com/photo-1520699049698-acd2fccb8cc8?auto=format&fit=crop&w=600" class="w-full h-full object-cover" alt="Work 4">
-                    <div class="overlay absolute inset-0 flex items-center justify-center">
-                        <p class="font-bold border-b border-yellow-500">Kitchen Upgrade</p>
-                    </div>
-                </div>
-                <div class="relative gallery-item h-64 rounded-lg overflow-hidden cursor-pointer">
-                    <img src="https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&fit=crop&w=600" class="w-full h-full object-cover" alt="Work 5">
-                    <div class="overlay absolute inset-0 flex items-center justify-center">
-                        <p class="font-bold border-b border-yellow-500">Master Painting</p>
-                    </div>
-                </div>
-                <div class="relative gallery-item h-64 rounded-lg overflow-hidden cursor-pointer">
-                    <img src="https://images.unsplash.com/photo-1516455590571-18256e5bb9ff?auto=format&fit=crop&w=600" class="w-full h-full object-cover" alt="Work 6">
-                    <div class="overlay absolute inset-0 flex items-center justify-center">
-                        <p class="font-bold border-b border-yellow-500">Tile Layout</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact & Socials -->
-    <section id="contact" class="py-24 px-6 md:px-12 bg-white">
-        <div class="max-w-5xl mx-auto flex flex-col md:flex-row gap-12">
-            <div class="flex-1">
-                <h2 class="text-4xl text-navy mb-6 text-center md:text-left">Get A Quote Today</h2>
-                <p class="text-slate-600 mb-8 text-center md:text-left">Ready to transform your home? Send us a message and our specialists will contact you for a free site inspection.</p>
+    <section class="py-24 bg-slate-900 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-20">
+            <div id="contact">
+                <h2 class="text-4xl font-extrabold text-white mb-6">Klaar voor een <span class="text-blue-500">transformatie?</span></h2>
+                <p class="text-slate-400 mb-10 text-lg">Laat uw gegevens achter en wij nemen binnen 24 uur contact op voor een bezichtiging op locatie.</p>
                 
-                <div class="space-y-6">
-                    <div class="flex items-center space-x-4">
-                        <div class="w-12 h-12 bg-yellow-100 text-yellow-600 rounded-full flex items-center justify-center">
-                            <i class="fas fa-phone"></i>
-                        </div>
-                        <div>
-                            <p class="text-sm text-slate-500">Call Us</p>
-                            <p class="font-bold">+212 6XX XXX XXX</p>
-                        </div>
+                <form onsubmit="handleContact(event)" class="space-y-4">
+                    <div class="grid grid-cols-2 gap-4">
+                        <input type="text" placeholder="Naam" class="bg-slate-800 border-0 rounded-2xl p-4 text-white focus:ring-2 focus:ring-blue-500 transition outline-none" required>
+                        <input type="tel" placeholder="Telefoon" class="bg-slate-800 border-0 rounded-2xl p-4 text-white focus:ring-2 focus:ring-blue-500 transition outline-none">
                     </div>
-                    <div class="flex items-center space-x-4">
-                        <div class="w-12 h-12 bg-yellow-100 text-yellow-600 rounded-full flex items-center justify-center">
-                            <i class="fas fa-envelope"></i>
-                        </div>
-                        <div>
-                            <p class="text-sm text-slate-500">Email Us</p>
-                            <p class="font-bold">contact@elitehomes.ma</p>
-                        </div>
-                    </div>
-                    <div class="flex items-center space-x-4">
-                        <div class="w-12 h-12 bg-yellow-100 text-yellow-600 rounded-full flex items-center justify-center">
-                            <i class="fas fa-location-dot"></i>
-                        </div>
-                        <div>
-                            <p class="text-sm text-slate-500">Service Area</p>
-                            <p class="font-bold">Nador, Al Aruit & Oriental Region</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="flex-1 bg-slate-50 p-8 rounded-2xl shadow-xl border border-slate-200">
-                <form class="space-y-4">
-                    <input type="text" placeholder="Your Name" class="w-full p-4 rounded bg-white border border-slate-300 focus:outline-none focus:ring-2 focus:ring-yellow-600">
-                    <input type="tel" placeholder="Phone Number" class="w-full p-4 rounded bg-white border border-slate-300 focus:outline-none focus:ring-2 focus:ring-yellow-600">
-                    <select class="w-full p-4 rounded bg-white border border-slate-300 focus:outline-none focus:ring-2 focus:ring-yellow-600">
-                        <option>Select Service</option>
-                        <option>Zellige/Tiling</option>
-                        <option>Painting</option>
-                        <option>Gypsum Decor</option>
-                        <option>Kitchen Maintenance</option>
-                    </select>
-                    <textarea placeholder="Message" rows="4" class="w-full p-4 rounded bg-white border border-slate-300 focus:outline-none focus:ring-2 focus:ring-yellow-600"></textarea>
-                    <button type="submit" class="w-full btn-gold py-4 rounded font-bold uppercase tracking-widest shadow-lg">Submit Request</button>
+                    <input type="email" placeholder="E-mailadres" class="w-full bg-slate-800 border-0 rounded-2xl p-4 text-white focus:ring-2 focus:ring-blue-500 transition outline-none" required>
+                    <textarea placeholder="Vertel ons over uw project..." rows="4" class="w-full bg-slate-800 border-0 rounded-2xl p-4 text-white focus:ring-2 focus:ring-blue-500 transition outline-none"></textarea>
+                    <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-extrabold py-5 rounded-2xl transition-all transform hover:scale-[1.02] active:scale-95 shadow-xl shadow-blue-600/20">
+                        Verstuur Aanvraag
+                    </button>
                 </form>
             </div>
+
+            <div id="comments" class="relative">
+                <div class="bg-white p-10 rounded-[2.5rem] shadow-2xl relative z-10">
+                    <h3 class="text-2xl font-extrabold mb-8 flex items-center gap-3">
+                        <i class="fas fa-star text-yellow-400"></i> Wat klanten zeggen
+                    </h3>
+                    
+                    <div id="commentList" class="space-y-6 max-h-[400px] overflow-y-auto pr-4 mb-8">
+                        <div class="bg-slate-50 p-6 rounded-2xl border border-slate-100">
+                            <div class="flex items-center gap-1 text-yellow-400 mb-2 text-xs">
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                            </div>
+                            <p class="text-slate-700 italic mb-3">"Nouraddine werkt ontzettend netjes. Onze badkamer ziet eruit als een hotel-spa!"</p>
+                            <p class="font-bold text-sm text-blue-600">— Familie Hendriks</p>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-2">
+                        <input id="commentInput" type="text" placeholder="Schrijf een review..." class="flex-1 bg-slate-100 border-0 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-blue-500 outline-none">
+                        <button onclick="addComment()" class="bg-slate-900 text-white px-6 py-3 rounded-xl font-bold hover:bg-blue-600 transition">Post</button>
+                    </div>
+                </div>
+                <div class="absolute -top-10 -right-10 w-40 h-40 bg-blue-600/20 rounded-full blur-3xl"></div>
+                <div class="absolute -bottom-10 -left-10 w-40 h-40 bg-emerald-600/10 rounded-full blur-3xl"></div>
+            </div>
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="bg-navy py-12 px-6 border-t border-white/10">
-        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center text-center md:text-left">
-            <div class="mb-8 md:mb-0">
-                <div class="text-2xl font-bold tracking-widest text-white mb-2 uppercase">
-                    ELITE<span class="text-yellow-500">HOMES</span>
-                </div>
-                <p class="text-white/50 text-sm">Superior quality for modern Moroccan homes.</p>
-            </div>
-
-            <div class="flex space-x-6">
-                <a href="#" class="text-2xl text-white/70 hover:text-yellow-500 transition"><i class="fab fa-facebook"></i></a>
-                <a href="#" class="text-2xl text-white/70 hover:text-yellow-500 transition"><i class="fab fa-instagram"></i></a>
-                <a href="#" class="text-2xl text-white/70 hover:text-yellow-500 transition"><i class="fab fa-tiktok"></i></a>
-                <a href="#" class="text-2xl text-white/70 hover:text-yellow-500 transition"><i class="fab fa-whatsapp"></i></a>
-            </div>
+    <footer class="py-12 text-center text-slate-500 text-sm bg-white border-t border-slate-100">
+        <div class="flex justify-center space-x-6 mb-6">
+            <a href="#" class="hover:text-blue-600 transition text-lg"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="hover:text-blue-600 transition text-lg"><i class="fab fa-facebook"></i></a>
+            <a href="#" class="hover:text-blue-600 transition text-lg"><i class="fab fa-whatsapp"></i></a>
         </div>
-        <div class="mt-12 text-center text-white/30 text-xs">
-            &copy; 2026 Elite Homes Morocco. All rights reserved.
-        </div>
+        <p>&copy; 2026 VAKMAN.PRO | Realisatie door Uw Bedrijfsnaam</p>
     </footer>
 
+    <script>
+        // Mobile Menu Toggle
+        function toggleMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('hidden');
+        }
+
+        // Portfolio Filter
+        function filterWorks(category) {
+            const items = document.querySelectorAll('.portfolio-item');
+            const buttons = document.querySelectorAll('.filter-btn');
+
+            buttons.forEach(btn => {
+                btn.classList.toggle('active', btn.getAttribute('data-filter') === category);
+            });
+
+            items.forEach(item => {
+                if (category === 'all' || item.classList.contains(category)) {
+                    item.style.display = 'block';
+                    setTimeout(() => item.style.opacity = '1', 10);
+                } else {
+                    item.style.opacity = '0';
+                    item.style.display = 'none';
+                }
+            });
+        }
+
+        // Handle Form
+        function handleContact(e) {
+            e.preventDefault();
+            const btn = e.target.querySelector('button');
+            const originalText = btn.innerHTML;
+            
+            btn.innerHTML = "<i class='fas fa-check mr-2'></i> Bericht Verzonden!";
+            btn.classList.replace('bg-blue-600', 'bg-emerald-500');
+            e.target.reset();
+
+            setTimeout(() => {
+                btn.innerHTML = originalText;
+                btn.classList.replace('bg-emerald-500', 'bg-blue-600');
+            }, 4000);
+        }
+
+        // Simple Comment Add
+        function addComment() {
+            const input = document.getElementById('commentInput');
+            const text = input.value.trim();
+            if(!text) return;
+
+            const list = document.getElementById('commentList');
+            const newComment = document.createElement('div');
+            newComment.className = "bg-slate-50 p-6 rounded-2xl border border-blue-100 animate-pulse";
+            newComment.innerHTML = `
+                <div class="flex items-center gap-1 text-yellow-400 mb-2 text-xs">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                </div>
+                <p class="text-slate-700 italic mb-3">"${text}"</p>
+                <p class="font-bold text-sm text-blue-600">— Recente Bezoeker</p>
+            `;
+            list.prepend(newComment);
+            input.value = "";
+            setTimeout(() => newComment.classList.remove('animate-pulse'), 1000);
+        }
+    </script>
 </body>
 </html>
