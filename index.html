@@ -1,277 +1,695 @@
 <!DOCTYPE html>
-<html lang="nl" class="scroll-smooth">
+<html lang="nl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>nouraddine.klusbedrijf | Tegel, Stucwerk & Renovatie</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <title>Ste Nouraddine Klusbedrijf | Vakmanschap in Maassluis</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap');
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         
-        body { font-family: 'Plus Jakarta Sans', sans-serif; }
-
-        .glass-nav {
-            background: rgba(255, 255, 255, 0.8);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
+        :root {
+            --primary: #1a5f2a;
+            --primary-light: #2d8a42;
+            --accent: #f5a623;
+            --dark: #1a1a1a;
+            --light: #f8f9fa;
+            --gray: #6c757d;
+            --white: #ffffff;
         }
-
-        .service-card { transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
-        .service-card:hover { transform: translateY(-8px); }
-
-        .portfolio-item { position: relative; overflow: hidden; border-radius: 1rem; }
-        .portfolio-overlay {
-            background: linear-gradient(to top, rgba(15, 23, 42, 0.9), transparent);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-        .portfolio-item:hover .portfolio-overlay { opacity: 1; }
         
-        .filter-btn.active {
-            background-color: #2563eb;
-            color: white;
-            border-color: #2563eb;
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            overflow-x: hidden;
         }
-
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #f1f1f1; }
-        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
-        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+        
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .logo i { color: var(--accent); }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+        
+        .nav-links a:hover { color: var(--primary); }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s;
+        }
+        
+        .nav-links a:hover::after { width: 100%; }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--primary);
+        }
+        
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--white);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="0.5" x="0" y="0" width="100" height="100"/></svg>');
+            background-size: 30px 30px;
+            opacity: 0.3;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            padding: 2rem;
+            max-width: 800px;
+        }
+        
+        .hero-badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+            backdrop-filter: blur(10px);
+        }
+        
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 800;
+            margin-bottom: 1rem;
+            line-height: 1.1;
+        }
+        
+        .hero p {
+            font-size: 1.25rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            border: 2px solid transparent;
+        }
+        
+        .btn-primary {
+            background: var(--accent);
+            color: var(--dark);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(245,166,35,0.4);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            color: var(--white);
+            border-color: rgba(255,255,255,0.5);
+        }
+        
+        .btn-outline:hover {
+            background: var(--white);
+            color: var(--primary);
+        }
+        
+        /* Services Section */
+        .section {
+            padding: 6rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        
+        .section-header h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--dark);
+            margin-bottom: 1rem;
+        }
+        
+        .section-header p {
+            color: var(--gray);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+        
+        .service-card {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.06);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0,0,0,0.04);
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+        }
+        
+        .service-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .service-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.75rem;
+            color: var(--dark);
+        }
+        
+        .service-card p {
+            color: var(--gray);
+            font-size: 0.95rem;
+        }
+        
+        /* Why Choose Us */
+        .why-us {
+            background: var(--light);
+        }
+        
+        .why-us .section { max-width: 1200px; }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .feature-item {
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+        }
+        
+        .feature-icon {
+            min-width: 50px;
+            height: 50px;
+            background: var(--primary);
+            color: var(--white);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+        
+        .feature-text h4 {
+            font-size: 1.1rem;
+            margin-bottom: 0.3rem;
+        }
+        
+        .feature-text p {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+        
+        /* Contact Section */
+        .contact-section {
+            background: var(--dark);
+            color: var(--white);
+        }
+        
+        .contact-section .section-header h2,
+        .contact-section .section-header p { color: var(--white); }
+        
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+        
+        .contact-info h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: rgba(255,255,255,0.05);
+            border-radius: 12px;
+            transition: all 0.3s;
+        }
+        
+        .contact-item:hover {
+            background: rgba(255,255,255,0.1);
+            transform: translateX(5px);
+        }
+        
+        .contact-item i {
+            width: 45px;
+            height: 45px;
+            background: var(--primary);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+        }
+        
+        .contact-form {
+            background: var(--white);
+            padding: 2.5rem;
+            border-radius: 20px;
+            color: var(--dark);
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.9rem 1rem;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            font-family: inherit;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+        
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+        
+        .btn-submit {
+            width: 100%;
+            padding: 1rem;
+            background: var(--primary);
+            color: var(--white);
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .btn-submit:hover {
+            background: var(--primary-light);
+            transform: translateY(-2px);
+        }
+        
+        /* Footer */
+        footer {
+            background: #111;
+            color: var(--gray);
+            text-align: center;
+            padding: 2rem;
+            font-size: 0.9rem;
+        }
+        
+        footer a {
+            color: var(--primary-light);
+            text-decoration: none;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .mobile-menu-btn { display: block; }
+            .hero h1 { font-size: 2.2rem; }
+            .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
+            .section { padding: 4rem 1.5rem; }
+        }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .animate {
+            animation: fadeInUp 0.8s ease forwards;
+        }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-900">
+<body>
 
-    <nav class="fixed top-0 w-full z-50 glass-nav border-b border-slate-200/50">
-        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-            <a href="#" class="text-2xl font-extrabold tracking-tighter text-blue-600">VAKMAN<span class="text-slate-900">.PRO</span></a>
-            
-            <div class="hidden md:flex items-center space-x-10 font-semibold text-sm uppercase tracking-wider">
-                <a href="#services" class="hover:text-blue-600 transition">Diensten</a>
-                <a href="#portfolio" class="hover:text-blue-600 transition">Portfolio</a>
-                <a href="#comments" class="hover:text-blue-600 transition">Reviews</a>
-                <a href="#contact" class="bg-slate-900 text-white px-6 py-3 rounded-full hover:bg-blue-600 transition shadow-lg shadow-blue-900/10">Offerte Aanvragen</a>
-            </div>
-
-            <button class="md:hidden text-2xl" onclick="toggleMenu()"><i class="fas fa-bars"></i></button>
-        </div>
-        
-        <div id="mobileMenu" class="hidden md:hidden bg-white border-b border-slate-200 px-6 py-6 space-y-4">
-            <a href="#services" class="block font-bold" onclick="toggleMenu()">Diensten</a>
-            <a href="#portfolio" class="block font-bold" onclick="toggleMenu()">Portfolio</a>
-            <a href="#contact" class="block font-bold" onclick="toggleMenu()">Contact</a>
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <i class="fas fa-hammer"></i>
+                Ste Nouraddine
+            </a>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#diensten">Diensten</a></li>
+                <li><a href="#over-ons">Over Ons</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <button class="mobile-menu-btn" onclick="toggleMenu()">
+                <i class="fas fa-bars"></i>
+            </button>
         </div>
     </nav>
 
-    <header class="pt-40 pb-24 px-6">
-        <div class="max-w-5xl mx-auto text-center">
-            <span class="inline-block px-4 py-1.5 mb-6 text-xs font-bold tracking-widest text-blue-600 uppercase bg-blue-50 rounded-full">Meester in Renovatie</span>
-            <h1 class="text-5xl md:text-7xl font-extrabold mb-8 tracking-tight leading-[1.1]">
-               Nouraddine klusbedrijf <span class="text-blue-600 italic">kleinste details.</span>
-            </h1>
-            <p class="text-lg md:text-xl text-slate-500 max-w-2xl mx-auto leading-relaxed mb-10">
-                Van luxe badkamerrenovaties tot strak stucwerk. Wij combineren jarenlange ervaring met een moderne afwerking.
-            </p>
-            <div class="flex flex-col sm:flex-row justify-center gap-4">
-                <a href="#portfolio" class="bg-blue-600 text-white px-8 py-4 rounded-2xl font-bold hover:bg-blue-700 transition-all shadow-xl shadow-blue-600/20 text-center">Bekijk Projecten</a>
-                <a href="#contact" class="bg-white border border-slate-200 px-8 py-4 rounded-2xl font-bold hover:bg-slate-50 transition-all text-center">Neem Contact Op</a>
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <div class="hero-badge">
+                <i class="fas fa-star"></i> Betrouwbaar & Gecertificeerd
+            </div>
+            <h1>Vakkundige Kluswerkzaamheden in Maassluis</h1>
+            <p>Ste Nouraddine Klusbedrijf staat voor kwaliteit, betrouwbaarheid en vakmanschap. Van kleine reparaties tot grote renovaties — wij regelen het voor u.</p>
+            <div class="hero-buttons">
+                <a href="#contact" class="btn btn-primary">
+                    <i class="fas fa-phone"></i> Gratis Offerte
+                </a>
+                <a href="#diensten" class="btn btn-outline">
+                    <i class="fas fa-arrow-down"></i> Onze Diensten
+                </a>
             </div>
         </div>
-    </header>
+    </section>
 
-    <section id="services" class="py-24 bg-white">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-4">
-                <div class="max-w-xl">
-                    <h2 class="text-3xl md:text-4xl font-extrabold mb-4">Onze Expertise</h2>
-                    <p class="text-slate-500">Wij bieden een totaaloplossing voor uw woning. Geen gedoe met verschillende aannemers, maar één aanspreekpunt.</p>
-                </div>
+    <!-- Services Section -->
+    <section class="section" id="diensten">
+        <div class="section-header">
+            <h2>Onze Diensten</h2>
+            <p>Wij bieden een breed scala aan klus- en bouwdiensten voor zowel particulieren als bedrijven in de regio Maassluis.</p>
+        </div>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon"><i class="fas fa-tools"></i></div>
+                <h3>Algemene Kluswerkzaamheden</h3>
+                <p>Van kleine reparaties tot uitgebreide onderhoudswerkzaamheden. Geen klus is te klein of te groot voor ons team.</p>
             </div>
-            
-            <div class="grid md:grid-cols-3 gap-8">
-                <div class="service-card group bg-slate-50 p-10 rounded-3xl border border-slate-100 hover:bg-white hover:border-blue-100">
-                    <div class="w-14 h-14 bg-blue-600 text-white rounded-2xl flex items-center justify-center mb-8 shadow-lg shadow-blue-600/30">
-                        <i class="fas fa-layer-group text-xl"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold mb-4">Tegelzetter</h3>
-                    <p class="text-slate-600 leading-relaxed">Grootformaat tegels, visgraatmotieven of klassiek natuursteen. Perfect recht, elke keer weer.</p>
-                </div>
+            <div class="service-card">
+                <div class="service-icon"><i class="fas fa-paint-roller"></i></div>
+                <h3>Schilderwerk & Afwerking</h3>
+                <p>Professioneel schilderwerk binnen en buiten. Wij zorgen voor een strakke afwerking die jarenlang mooi blijft.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon"><i class="fas fa-hammer"></i></div>
+                <h3>Timmerwerk</h3>
+                <p>Maatwerk in hout: van kozijnen en deuren tot maatmeubilair en traprenovaties. Precisie en kwaliteit staan voorop.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon"><i class="fas fa-water"></i></div>
+                <h3>Badkamer & Keuken</h3>
+                <p>Complete renovatie van badkamers en keukens. Van ontwerp tot oplevering, wij realiseren uw droomruimte.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon"><i class="fas fa-home"></i></div>
+                <h3>Renovatie & Verbouw</h3>
+                <p>Grote en kleine renovatieprojecten. Wij helpen u bij het realiseren van uw bouwplannen met vakmanschap.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon"><i class="fas fa-wrench"></i></div>
+                <h3>Onderhoud & Reparatie</h3>
+                <p>Periodiek onderhoud en spoedreparaties. Snel ter plaatse en altijd met de juiste oplossing.</p>
+            </div>
+        </div>
+    </section>
 
-                <div class="service-card group bg-slate-50 p-10 rounded-3xl border border-slate-100 hover:bg-white hover:border-blue-100">
-                    <div class="w-14 h-14 bg-emerald-500 text-white rounded-2xl flex items-center justify-center mb-8 shadow-lg shadow-emerald-500/30">
-                        <i class="fas fa-sink text-xl"></i>
+    <!-- Why Choose Us -->
+    <section class="why-us" id="over-ons">
+        <div class="section">
+            <div class="section-header">
+                <h2>Waarom Ste Nouraddine?</h2>
+                <p>Wij onderscheiden ons door onze persoonlijke aanpak, vakkennis en betrouwbaarheid.</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-item">
+                    <div class="feature-icon"><i class="fas fa-check-circle"></i></div>
+                    <div class="feature-text">
+                        <h4>10+ Jaar Ervaring</h4>
+                        <p>Jarenlange ervaring in de bouw en klusbranche.</p>
                     </div>
-                    <h3 class="text-2xl font-bold mb-4">Badkamers</h3>
-                    <p class="text-slate-600 leading-relaxed">Complete renovatie inclusief leidingwerk, sanitair installatie en waterdichte afwerking.</p>
                 </div>
-
-                <div class="service-card group bg-slate-50 p-10 rounded-3xl border border-slate-100 hover:bg-white hover:border-blue-100">
-                    <div class="w-14 h-14 bg-orange-500 text-white rounded-2xl flex items-center justify-center mb-8 shadow-lg shadow-orange-500/30">
-                        <i class="fas fa-brush text-xl"></i>
+                <div class="feature-item">
+                    <div class="feature-icon"><i class="fas fa-euro-sign"></i></div>
+                    <div class="feature-text">
+                        <h4>Scherpe Prijzen</h4>
+                        <p>Transparante offertes zonder verborgen kosten.</p>
                     </div>
-                    <h3 class="text-2xl font-bold mb-4">Stucwerk</h3>
-                    <p class="text-slate-600 leading-relaxed">Sausklaar stucwerk of decoratieve betonlook (Cire). Voor wanden die gezien mogen worden.</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon"><i class="fas fa-clock"></i></div>
+                    <div class="feature-text">
+                        <h4>Snelle Service</h4>
+                        <p>Flexibele planning en snelle responstijden.</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon"><i class="fas fa-shield-alt"></i></div>
+                    <div class="feature-text">
+                        <h4>Garantie op Werk</h4>
+                        <p>Kwaliteit staat garant voor duurzaam resultaat.</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon"><i class="fas fa-handshake"></i></div>
+                    <div class="feature-text">
+                        <h4>Persoonlijk Contact</h4>
+                        <p>Duidelijke communicatie van begin tot eind.</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon"><i class="fas fa-map-marker-alt"></i></div>
+                    <div class="feature-text">
+                        <h4>Lokaal in Maassluis</h4>
+                        <p>Actief in Maassluis en omgeving.</p>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="portfolio" class="py-24 px-6">
-        <div class="max-w-7xl mx-auto">
-            <div class="flex flex-col md:flex-row justify-between items-center mb-12 gap-8">
-                <h2 class="text-3xl font-extrabold">Recent Werk</h2>
-                <div class="flex flex-wrap justify-center gap-2 bg-white p-1.5 rounded-2xl border border-slate-200">
-                    <button onclick="filterWorks('all')" class="filter-btn active px-6 py-2.5 rounded-xl text-sm font-bold transition-all" data-filter="all">Alles</button>
-                    <button onclick="filterWorks('tegel')" class="filter-btn px-6 py-2.5 rounded-xl text-sm font-bold transition-all" data-filter="tegel">Tegelwerk</button>
-                    <button onclick="filterWorks('sanitair')" class="filter-btn px-6 py-2.5 rounded-xl text-sm font-bold transition-all" data-filter="sanitair">Badkamers</button>
-                </div>
+    <!-- Contact Section -->
+    <section class="contact-section" id="contact">
+        <div class="section">
+            <div class="section-header">
+                <h2>Neem Contact Op</h2>
+                <p>Vraag vandaag nog een gratis offerte aan of neem contact met ons op voor meer informatie.</p>
             </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="gallery">
-                <div class="portfolio-item tegel group cursor-pointer">
-                    <img src="https://images.unsplash.com/photo-1502005229762-cf1b2da7c5d6?q=80&w=800" class="w-full aspect-[4/5] object-cover transition duration-700 group-hover:scale-110" alt="Luxe Tegelwerk">
-                    <div class="portfolio-overlay absolute inset-0 flex flex-col justify-end p-8 text-white">
-                        <span class="text-xs font-bold uppercase tracking-widest text-blue-400 mb-2">Tegelwerk</span>
-                        <h4 class="text-xl font-bold">Marmer-look Woonkamer</h4>
-                    </div>
-                </div>
-                <div class="portfolio-item sanitair group cursor-pointer">
-                    <img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?q=80&w=800" class="w-full aspect-[4/5] object-cover transition duration-700 group-hover:scale-110" alt="Badkamer">
-                    <div class="portfolio-overlay absolute inset-0 flex flex-col justify-end p-8 text-white">
-                        <span class="text-xs font-bold uppercase tracking-widest text-blue-400 mb-2">Badkamer</span>
-                        <h4 class="text-xl font-bold">Moderne Inloopdouche</h4>
-                    </div>
-                </div>
-                <div class="portfolio-item tegel group cursor-pointer">
-                    <img src="https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?q=80&w=800" class="w-full aspect-[4/5] object-cover transition duration-700 group-hover:scale-110" alt="Keuken">
-                    <div class="portfolio-overlay absolute inset-0 flex flex-col justify-end p-8 text-white">
-                        <span class="text-xs font-bold uppercase tracking-widest text-blue-400 mb-2">Stucwerk</span>
-                        <h4 class="text-xl font-bold">Beton Cire Wand</h4>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="py-24 bg-slate-900 overflow-hidden">
-        <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-20">
-            <div id="contact">
-                <h2 class="text-4xl font-extrabold text-white mb-6">Klaar voor een <span class="text-blue-500">transformatie?</span></h2>
-                <p class="text-slate-400 mb-10 text-lg">Laat uw gegevens achter en wij nemen binnen 24 uur contact op voor een bezichtiging op locatie.</p>
-                
-                <form onsubmit="handleContact(event)" class="space-y-4">
-                    <div class="grid grid-cols-2 gap-4">
-                        <input type="text" placeholder="Naam" class="bg-slate-800 border-0 rounded-2xl p-4 text-white focus:ring-2 focus:ring-blue-500 transition outline-none" required>
-                        <input type="tel" placeholder="Telefoon" class="bg-slate-800 border-0 rounded-2xl p-4 text-white focus:ring-2 focus:ring-blue-500 transition outline-none">
-                    </div>
-                    <input type="email" placeholder="E-mailadres" class="w-full bg-slate-800 border-0 rounded-2xl p-4 text-white focus:ring-2 focus:ring-blue-500 transition outline-none" required>
-                    <textarea placeholder="Vertel ons over uw project..." rows="4" class="w-full bg-slate-800 border-0 rounded-2xl p-4 text-white focus:ring-2 focus:ring-blue-500 transition outline-none"></textarea>
-                    <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-extrabold py-5 rounded-2xl transition-all transform hover:scale-[1.02] active:scale-95 shadow-xl shadow-blue-600/20">
-                        Verstuur Aanvraag
-                    </button>
-                </form>
-            </div>
-
-            <div id="comments" class="relative">
-                <div class="bg-white p-10 rounded-[2.5rem] shadow-2xl relative z-10">
-                    <h3 class="text-2xl font-extrabold mb-8 flex items-center gap-3">
-                        <i class="fas fa-star text-yellow-400"></i> Wat klanten zeggen
-                    </h3>
-                    
-                    <div id="commentList" class="space-y-6 max-h-[400px] overflow-y-auto pr-4 mb-8">
-                        <div class="bg-slate-50 p-6 rounded-2xl border border-slate-100">
-                            <div class="flex items-center gap-1 text-yellow-400 mb-2 text-xs">
-                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-                            </div>
-                            <p class="text-slate-700 italic mb-3">"Nouraddine werkt ontzettend netjes. Onze badkamer ziet eruit als een hotel-spa!"</p>
-                            <p class="font-bold text-sm text-blue-600">— Familie Hendriks</p>
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <h3>Contactgegevens</h3>
+                    <div class="contact-item">
+                        <i class="fas fa-user"></i>
+                        <div>
+                            <strong>Bedrijf</strong><br>
+                            Ste Nouraddine Klusbedrijf
                         </div>
                     </div>
-
-                    <div class="flex gap-2">
-                        <input id="commentInput" type="text" placeholder="Schrijf een review..." class="flex-1 bg-slate-100 border-0 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-blue-500 outline-none">
-                        <button onclick="addComment()" class="bg-slate-900 text-white px-6 py-3 rounded-xl font-bold hover:bg-blue-600 transition">Post</button>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <strong>Adres</strong><br>
+                            Kopermolen 31, 3146 SE Maassluis
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <strong>E-mail</strong><br>
+                            info@stenouraddine.nl
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-clock"></i>
+                        <div>
+                            <strong>Openingstijden</strong><br>
+                            Ma - Vr: 08:00 - 18:00 | Za: Op afspraak
+                        </div>
                     </div>
                 </div>
-                <div class="absolute -top-10 -right-10 w-40 h-40 bg-blue-600/20 rounded-full blur-3xl"></div>
-                <div class="absolute -bottom-10 -left-10 w-40 h-40 bg-emerald-600/10 rounded-full blur-3xl"></div>
+                <div class="contact-form">
+                    <form onsubmit="handleSubmit(event)">
+                        <div class="form-group">
+                            <label for="name">Naam</label>
+                            <input type="text" id="name" placeholder="Uw naam" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">E-mail</label>
+                            <input type="email" id="email" placeholder="uw@email.nl" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Telefoon</label>
+                            <input type="tel" id="phone" placeholder="06-12345678">
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Bericht</label>
+                            <textarea id="message" placeholder="Beschrijf uw klus of vraag..." required></textarea>
+                        </div>
+                        <button type="submit" class="btn-submit">
+                            <i class="fas fa-paper-plane"></i> Verstuur Bericht
+                        </button>
+                    </form>
+                </div>
             </div>
         </div>
     </section>
 
-    <footer class="py-12 text-center text-slate-500 text-sm bg-white border-t border-slate-100">
-        <div class="flex justify-center space-x-6 mb-6">
-            <a href="#" class="hover:text-blue-600 transition text-lg"><i class="fab fa-instagram"></i></a>
-            <a href="#" class="hover:text-blue-600 transition text-lg"><i class="fab fa-facebook"></i></a>
-            <a href="#" class="hover:text-blue-600 transition text-lg"><i class="fab fa-whatsapp"></i></a>
-        </div>
-        <p>&copy; 2026 VAKMAN.PRO | Realisatie door Uw Bedrijfsnaam</p>
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Ste Nouraddine Klusbedrijf. Alle rechten voorbehouden. | Kopermolen 31, 3146 SE Maassluis</p>
     </footer>
 
     <script>
-        // Mobile Menu Toggle
-        function toggleMenu() {
-            const menu = document.getElementById('mobileMenu');
-            menu.classList.toggle('hidden');
-        }
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.style.boxShadow = '0 2px 30px rgba(0,0,0,0.15)';
+            } else {
+                navbar.style.boxShadow = '0 2px 20px rgba(0,0,0,0.08)';
+            }
+        });
 
-        // Portfolio Filter
-        function filterWorks(category) {
-            const items = document.querySelectorAll('.portfolio-item');
-            const buttons = document.querySelectorAll('.filter-btn');
-
-            buttons.forEach(btn => {
-                btn.classList.toggle('active', btn.getAttribute('data-filter') === category);
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
             });
+        });
 
-            items.forEach(item => {
-                if (category === 'all' || item.classList.contains(category)) {
-                    item.style.display = 'block';
-                    setTimeout(() => item.style.opacity = '1', 10);
-                } else {
-                    item.style.opacity = '0';
-                    item.style.display = 'none';
-                }
-            });
-        }
-
-        // Handle Form
-        function handleContact(e) {
+        // Form submission
+        function handleSubmit(e) {
             e.preventDefault();
-            const btn = e.target.querySelector('button');
-            const originalText = btn.innerHTML;
-            
-            btn.innerHTML = "<i class='fas fa-check mr-2'></i> Bericht Verzonden!";
-            btn.classList.replace('bg-blue-600', 'bg-emerald-500');
+            alert('Bedankt voor uw bericht! Wij nemen zo spoedig mogelijk contact met u op.');
             e.target.reset();
-
-            setTimeout(() => {
-                btn.innerHTML = originalText;
-                btn.classList.replace('bg-emerald-500', 'bg-blue-600');
-            }, 4000);
         }
 
-        // Simple Comment Add
-        function addComment() {
-            const input = document.getElementById('commentInput');
-            const text = input.value.trim();
-            if(!text) return;
-
-            const list = document.getElementById('commentList');
-            const newComment = document.createElement('div');
-            newComment.className = "bg-slate-50 p-6 rounded-2xl border border-blue-100 animate-pulse";
-            newComment.innerHTML = `
-                <div class="flex items-center gap-1 text-yellow-400 mb-2 text-xs">
-                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-                </div>
-                <p class="text-slate-700 italic mb-3">"${text}"</p>
-                <p class="font-bold text-sm text-blue-600">— Recente Bezoeker</p>
-            `;
-            list.prepend(newComment);
-            input.value = "";
-            setTimeout(() => newComment.classList.remove('animate-pulse'), 1000);
+        // Mobile menu toggle
+        function toggleMenu() {
+            const navLinks = document.querySelector('.nav-links');
+            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+            navLinks.style.position = 'absolute';
+            navLinks.style.top = '70px';
+            navLinks.style.left = '0';
+            navLinks.style.right = '0';
+            navLinks.style.flexDirection = 'column';
+            navLinks.style.background = 'white';
+            navLinks.style.padding = '2rem';
+            navLinks.style.boxShadow = '0 10px 30px rgba(0,0,0,0.1)';
         }
     </script>
-</body>
-</html>
